@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Admin Panel</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+        }
+        th {
+            background-color: #4CAF50;
+            color: white;
+        }
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+    <h1>Admin Panel</h1>
+    <button onclick="exportData()">Export Data</button>
+    <table id="usersTable">
+        <tr>
+            <th>User ID</th>
+            <th>Coins</th>
+            <th>Watched Time</th>
+            <th>Last Activity</th>
+        </tr>
+    </table>
+
+    <script>
+        // Load data from localStorage
+        const userData = JSON.parse(localStorage.getItem('userData'));
+        const table = document.getElementById('usersTable');
+
+        if(userData) {
+            const row = table.insertRow();
+            row.insertCell().textContent = 'User-1';
+            row.insertCell().textContent = userData.coins;
+            row.insertCell().textContent = `${Math.floor(userData.watchedTime/60)} Minutes`;
+            row.insertCell().textContent = new Date().toLocaleString();
+        }
+
+        function exportData() {
+            const data = JSON.stringify(userData, null, 2);
+            const blob = new Blob([data], {type: 'application/json'});
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'userData.json';
+            a.click();
+        }
+    </script>
+</body>
+</html>
+
+
+"https://www.youtube.com/embed/eOc3n1XUkH8?si=i7Rm49XTz1KBREg8"
