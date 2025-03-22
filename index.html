@@ -1,64 +1,89 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Admin Panel</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Watch & Earn</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    
     <style>
-        table {
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        .phone-wrapper {
             width: 100%;
-            border-collapse: collapse;
-            margin-top: 20px;
+            max-width: 400px;
+            margin: 20px auto;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0px 6px 10px rgba(0, 0, 0, 0.25);
+            background: white;
+            text-align: center;
         }
-        th, td {
-            border: 1px solid #ddd;
-            padding: 12px;
-            text-align: left;
-        }
-        th {
-            background-color: #4CAF50;
+        nav {
+            display: flex;
+            align-items: center;
+            padding: 15px;
+            background-color: #184245;
             color: white;
+            position: relative;
         }
-        tr:nth-child(even) {
-            background-color: #f2f2f2;
+        .back-btn {
+            position: absolute;
+            left: 10px;
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+            color: white;
+            font-size: 18px;
+            font-weight: bold;
+            background: none;
+            border: none;
+            cursor: pointer;
+        }
+        .back-btn i {
+            margin-right: 5px;
+            font-size: 20px;
+        }
+        #video-container {
+            margin: 20px auto;
+        }
+        #coin-display {
+            font-size: 20px;
+            font-weight: bold;
+            margin-top: 10px;
         }
     </style>
 </head>
 <body>
-    <h1>Admin Panel</h1>
-    <button onclick="exportData()">Export Data</button>
-    <table id="usersTable">
-        <tr>
-            <th>User ID</th>
-            <th>Coins</th>
-            <th>Watched Time</th>
-            <th>Last Activity</th>
-        </tr>
-    </table>
 
-    <script>
-        // Load data from localStorage
-        const userData = JSON.parse(localStorage.getItem('userData'));
-        const table = document.getElementById('usersTable');
+<div class="phone-wrapper">
+    <!-- Navbar with Back Button -->
+    <nav>
+        <a href="javascript:history.back()" class="back-btn">
+            <i class="fas fa-arrow-left"></i> Back
+        </a>
+        <div style="width: 100%; text-align: center;">
+            <h1 style="margin: 0;">play-cash</h1>
+        </div>
+    </nav>
 
-        if(userData) {
-            const row = table.insertRow();
-            row.insertCell().textContent = 'User-1';
-            row.insertCell().textContent = userData.coins;
-            row.insertCell().textContent = `${Math.floor(userData.watchedTime/60)} Minutes`;
-            row.insertCell().textContent = new Date().toLocaleString();
-        }
+    <h1>Watch Video & Earn Coins</h1>
+    <div id="video-container">
+        <iframe id="video" width="320" height="240" 
+            src="https://www.youtube.com/embed/annBPyQUE2c?enablejsapi=1" 
+            frameborder="0" allowfullscreen>
+        </iframe>
+    </div>
+    <div id="coin-display">Coins: <span id="coins">0</span></div>
+</div>
 
-        function exportData() {
-            const data = JSON.stringify(userData, null, 2);
-            const blob = new Blob([data], {type: 'application/json'});
-            const url = URL.createObjectURL(blob);
-            const a = document.createElement('a');
-            a.href = url;
-            a.download = 'userData.json';
-            a.click();
-        }
-    </script>
+<script src="https://www.youtube.com/iframe_api"></script>
+<script src="video.js"></script>
+
 </body>
 </html>
-
-
-"https://www.youtube.com/embed/eOc3n1XUkH8?si=i7Rm49XTz1KBREg8"
